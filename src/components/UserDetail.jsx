@@ -2,17 +2,22 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import { formatDate } from "../utils/tools";
 import { FaUpload } from "react-icons/fa6";
+
 function UserDetail({ authLogin, onUserChangePhoto }) {
   const fileInputRef = useRef(null);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      onUserChangePhoto({ photoFile: file });
+      // Membuat URL sementara untuk foto baru
+      const newPhotoUrl = URL.createObjectURL(file);
+      onUserChangePhoto({ photoFile: file, newPhotoUrl });
     }
   };
+
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };
+
   return (
     <div id={authLogin.id} className="card">
       <div className="card-body">
@@ -25,6 +30,7 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
                   width={76}
                   height={76}
                   src={authLogin.photo}
+                  alt="Profile"
                 />
               </div>
               <div className="ms-3">
@@ -67,16 +73,18 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
     </div>
   );
 }
+
 const authLoginShape = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
 };
+
 UserDetail.propTypes = {
   authLogin: PropTypes.shape(authLoginShape).isRequired,
   onUserChangePhoto: PropTypes.func.isRequired,
 };
-// eslint-disable-next-line react-refresh/only-export-components
+
 export { authLoginShape };
 export default UserDetail;
