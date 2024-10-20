@@ -24,5 +24,8 @@
 - Menambahkan AucationDetaiPage (11S22025 - Martha Yulinda Lbn Tobing)
 - Menambahkan UserDetail (11S22025 - Martha Yulinda Lbn Tobing)
 - Mengganti logo dan title website dan memperbaharui index.html (11S22025 - Martha Yulinda Lbn Tobing)
+- Menambah AucationDetail (11S22020 - Maria Laura Nasution)
+- Menambah AucationList (11S22020 - Maria Laura Nasution)
+- Menambah PopUp Berhasil hapus dan memperbaharui AucationDetail (11S22020 - Maria Laura Nasution)
   
   
