@@ -17,3 +17,5 @@
 - Menambahkan API Aucations (112S2036 - Yizreel Schwartz Sipahutar)
 - Melengkapi directory untuk sumber data
 - Menambahkan Redux untuk Aucation
+- Menambahkan input untuk Aucation
+  
