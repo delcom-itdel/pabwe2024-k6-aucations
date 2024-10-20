@@ -15,7 +15,7 @@
 - Assets: Bootsrap & SweetAlert2 (112S2036 - Yizreel Schwartz Sipahutar)
 - Form: Login, Register Components & Pages (112S2036 - Yizreel Schwartz Sipahutar)
 - Menambahkan API Aucations (112S2036 - Yizreel Schwartz Sipahutar)
-- Melengkapi directory untuk sumber data
-- Menambahkan Redux untuk Aucation
-- Menambahkan input untuk Aucation
+- Melengkapi directory untuk sumber data (112S2036 - Yizreel Schwartz Sipahutar)
+- Menambahkan Redux untuk Aucation (112S2036 - Yizreel Schwartz Sipahutar)
+- Menambahkan input untuk Aucation (112S2036 - Yizreel Schwartz Sipahutar)
   
