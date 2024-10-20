@@ -18,4 +18,7 @@
 - Melengkapi directory untuk sumber data (112S2036 - Yizreel Schwartz Sipahutar)
 - Menambahkan Redux untuk Aucation (112S2036 - Yizreel Schwartz Sipahutar)
 - Menambahkan input untuk Aucation (112S2036 - Yizreel Schwartz Sipahutar)
+- Menambahkan page untuk add Aucation (11S22039 - Prans Daniel Simarmata)
+- Menambahkan aucation item  (11S22039 - Prans Daniel Simarmata)
+- Menambahkan inner css untuk memperbaharui tampilan (11S22039 - Prans Daniel Simarmata)
   
