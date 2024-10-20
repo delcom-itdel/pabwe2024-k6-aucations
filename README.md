@@ -21,4 +21,8 @@
 - Menambahkan page untuk add Aucation (11S22039 - Prans Daniel Simarmata)
 - Menambahkan aucation item  (11S22039 - Prans Daniel Simarmata)
 - Menambahkan inner css untuk memperbaharui tampilan (11S22039 - Prans Daniel Simarmata)
+- Menambahkan AucationDetaiPage (11S22025 - Martha Yulinda Lbn Tobing)
+- Menambahkan UserDetail (11S22025 - Martha Yulinda Lbn Tobing)
+- Mengganti logo dan title website dan memperbaharui index.html (11S22025 - Martha Yulinda Lbn Tobing)
+  
   
