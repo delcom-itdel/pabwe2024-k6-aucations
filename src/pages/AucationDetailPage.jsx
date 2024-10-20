@@ -10,7 +10,7 @@ import {
   asyncAddBid,
   asyncDeleteBid,
 } from "../states/aucations/action";
-import AucationDetail from "../components/AucationDetail";
+
 import { FaTrash } from "react-icons/fa6";
 
 function AucationDetailPage() {
