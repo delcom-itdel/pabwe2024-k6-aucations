@@ -58,11 +58,20 @@ function AucationDetailPage() {
       buttonsStyling: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(asyncDeleteAucation(id));
-        navigate("/"); // Navigate back to homepage after deletion
+        dispatch(asyncDeleteAucation(id))
+          .then(() => {
+            // Tampilkan popup jika berhasil dihapus
+            Swal.fire("Berhasil!", "Lelang berhasil dihapus.", "success");
+            navigate("/"); // Kembali ke halaman utama setelah penghapusan
+          })
+          .catch((error) => {
+            // Tampilkan popup jika ada kesalahan saat menghapus
+            Swal.fire("Error", error.message, "error");
+          });
       }
     });
   };
+  
 
   // Handler for cover file selection
   const handleCoverChange = (event) => {
