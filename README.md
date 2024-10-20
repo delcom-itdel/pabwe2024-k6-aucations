@@ -1,9 +1,8 @@
-# Kelompok 6 - Aucations
+# React + Vite
 
-| NIM      | Nama              |
-|----------|-------------------|
-| 11S22039 | Prans Simarmata   |
-| 11S22038 | Yizzrel Sipahutar |
-| 11S22025 | Martha Tobing     |
-| 11S22024 | Gracesia Marbun   |
-| 11S22020 | Maria Nasution    |
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
