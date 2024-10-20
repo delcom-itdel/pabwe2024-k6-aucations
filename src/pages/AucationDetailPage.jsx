@@ -82,20 +82,21 @@ function AucationDetailPage() {
   };
 
   // Handler to change the aucation cover
-  const handleChangeCover = () => {
-    if (selectedCover) {
-      dispatch(asyncChangeAucationCover({ id, cover: selectedCover }))
-        .then(() => {
-          Swal.fire("Success", "Aucation cover updated successfully", "success");
-          navigate("/"); // Return to the homepage after success
-        })
-        .catch((error) => {
-          Swal.fire("Error", error.message, "error");
-        });
-    } else {
-      Swal.fire("Error", "Please select a cover to upload", "error");
-    }
-  };
+const handleChangeCover = () => {
+  if (selectedCover) {
+    dispatch(asyncChangeAucationCover({ id, cover: selectedCover }))
+      .then(() => {
+        Swal.fire("Berhasil", "Cover lelang berhasil diperbarui", "success");
+        navigate("/"); // Kembali ke halaman utama setelah sukses
+      })
+      .catch((error) => {
+        Swal.fire("Gagal", error.message, "error");
+      });
+  } else {
+    Swal.fire("Gagal", "Silakan pilih cover untuk diunggah", "error");
+  }
+};
+
 
 
 // Handler to add a bid
@@ -103,16 +104,16 @@ const handleAddBid = async () => {
   const bidValue = parseFloat(bidAmount);
 
   if (bidValue <= 0) {
-    Swal.fire("Error", "Please enter a valid bid amount", "error");
+    Swal.fire("Gagal", "Silakan masukkan jumlah tawaran yang valid", "error");
   } else if (detailAucation.bids.length === 0 && bidValue < detailAucation.start_bid) {
     // Jika belum ada bid dan bid lebih kecil dari start bid
-    Swal.fire("Error", `Your bid must be higher than the starting bid of Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
+    Swal.fire("Gagal", `Tawaran Anda harus lebih tinggi dari tawaran awal Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
   } else if (highestBid !== null && bidValue <= highestBid) {
     // Jika ada bid dan nilai bid lebih kecil atau sama dengan bid tertinggi
-    Swal.fire("Error", `Your bid must be higher than the current highest bid of Rp ${highestBid.toLocaleString("id-ID")}`, "error");
+    Swal.fire("Gagal", `Tawaran Anda harus lebih tinggi dari tawaran tertinggi saat ini Rp ${highestBid.toLocaleString("id-ID")}`, "error");
   } else {
     await dispatch(asyncAddBid({ id, bid: bidValue }));
-    Swal.fire("Success", "Bid successfully added", "success");
+    Swal.fire("Berhasil", "Tawaran berhasil ditambahkan", "success");
     await dispatch(asyncDetailAucation(id)); // Reload aucation details
   }
 };
