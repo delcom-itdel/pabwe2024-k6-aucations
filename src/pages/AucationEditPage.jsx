@@ -69,12 +69,12 @@ function AucationEditPage() {
             htmlFor="formTitle"
             style={{ display: "block", marginBottom: "5px" }}
           >
-            Judul
+            Title
           </label>
           <input
             id="formTitle"
             type="text"
-            placeholder="Masukkan judul auction"
+            placeholder="Enter auction title"
             value={title}
             onChange={handleInputChange(setTitle)}
             required
@@ -85,12 +85,12 @@ function AucationEditPage() {
             htmlFor="formDescription"
             style={{ display: "block", marginBottom: "5px" }}
           >
-            Deskripsi
+           Description
           </label>
           <textarea
             id="formDescription"
             rows="3"
-            placeholder="Masukkan deskripsi auction"
+            placeholder="Enter auction description"
             value={description}
             onChange={handleInputChange(setDescription)}
             required
@@ -106,7 +106,7 @@ function AucationEditPage() {
           <input
             id="formStartBid"
             type="number"
-            placeholder="Masukkan nilai start bid"
+            placeholder="Enter starting bid amount"
             value={startBid}
             onChange={handleInputChange(setStartBid)}
             required
@@ -117,7 +117,7 @@ function AucationEditPage() {
             htmlFor="formClosedAt"
             style={{ display: "block", marginBottom: "5px" }}
           >
-            Tanggal Penutupan
+            Closing Date
           </label>
           <input
             id="formClosedAt"

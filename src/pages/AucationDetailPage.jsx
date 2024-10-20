@@ -46,11 +46,11 @@ function AucationDetailPage() {
   // Handler to delete the aucation
   const handleDelete = () => {
     Swal.fire({
-      title: "Hapus ",
-      text: `Apakah kamu yakin ingin menghapus lelang: ${detailAucation.title}?`,
+      title: "Delete",
+      text: `Are you sure you want to delete the auction: ${detailAucation.title}?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Ya, Tetap Hapus",
+      confirmButtonText: "Yes, Delete It",
       customClass: {
         confirmButton: "btn btn-danger me-3 mb-4",
         cancelButton: "btn btn-secondary mb-4",
@@ -61,7 +61,7 @@ function AucationDetailPage() {
         dispatch(asyncDeleteAucation(id))
           .then(() => {
             // Tampilkan popup jika berhasil dihapus
-            Swal.fire("Berhasil!", "Lelang berhasil dihapus.", "success");
+            Swal.fire("Succes!", "The auction has been successfully deleted.", "success");
             navigate("/"); // Kembali ke halaman utama setelah penghapusan
           })
           .catch((error) => {
@@ -86,16 +86,17 @@ const handleChangeCover = () => {
   if (selectedCover) {
     dispatch(asyncChangeAucationCover({ id, cover: selectedCover }))
       .then(() => {
-        Swal.fire("Berhasil", "Cover lelang berhasil diperbarui", "success");
-        navigate("/"); // Kembali ke halaman utama setelah sukses
+        Swal.fire("Success", "Auction cover updated successfully", "success");
+        navigate("/"); // Return to the homepage after success
       })
       .catch((error) => {
-        Swal.fire("Gagal", error.message, "error");
+        Swal.fire("Error", error.message, "error");
       });
   } else {
-    Swal.fire("Gagal", "Silakan pilih cover untuk diunggah", "error");
+    Swal.fire("Error", "Please select a cover to upload", "error");
   }
 };
+
 
 
 
@@ -104,17 +105,17 @@ const handleAddBid = async () => {
   const bidValue = parseFloat(bidAmount);
 
   if (bidValue <= 0) {
-    Swal.fire("Gagal", "Silakan masukkan jumlah tawaran yang valid", "error");
+    Swal.fire("Error", "Please enter a valid bid amount", "error");
   } else if (detailAucation.bids.length === 0 && bidValue < detailAucation.start_bid) {
-    // Jika belum ada bid dan bid lebih kecil dari start bid
-    Swal.fire("Gagal", `Tawaran Anda harus lebih tinggi dari tawaran awal Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
+    // If no bid exists and bid is lower than the start bid
+    Swal.fire("Error", `Your bid must be higher than the starting bid of Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
   } else if (highestBid !== null && bidValue <= highestBid) {
-    // Jika ada bid dan nilai bid lebih kecil atau sama dengan bid tertinggi
-    Swal.fire("Gagal", `Tawaran Anda harus lebih tinggi dari tawaran tertinggi saat ini Rp ${highestBid.toLocaleString("id-ID")}`, "error");
+    // If a bid exists and the bid value is lower than or equal to the highest bid
+    Swal.fire("Error", `Your bid must be higher than the current highest bid of Rp ${highestBid.toLocaleString("id-ID")}`, "error");
   } else {
     await dispatch(asyncAddBid({ id, bid: bidValue }));
-    Swal.fire("Berhasil", "Tawaran berhasil ditambahkan", "success");
-    await dispatch(asyncDetailAucation(id)); // Reload aucation details
+    Swal.fire("Success", "Bid successfully added", "success");
+    await dispatch(asyncDetailAucation(id)); // Reload auction details
   }
 };
 
@@ -122,11 +123,11 @@ const handleAddBid = async () => {
   // Handler to delete the user's bid
   const handleDeleteBid = () => {
     Swal.fire({
-      title: "Hapus Tawaran",
-      text: `Apakah kamu yakin ingin menghapus tawaranmu pada lelang ini?`,
+      title: "Delete Bid",
+      text: `Are you sure you want to delete your bid on this auction?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Ya, Hapus Tawaran",
+      confirmButtonText: "Yes, Delete Bid",
       customClass: {
         confirmButton: "btn btn-danger me-3 mb-4",
         cancelButton: "btn btn-secondary mb-4",
@@ -138,7 +139,7 @@ const handleAddBid = async () => {
       }
     });
   };
-
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -165,7 +166,7 @@ const handleAddBid = async () => {
                 </h2>
 
                 <p className="mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  <span className="badge bg-info">Deskripsi</span>: {detailAucation.description}
+                  <span className="badge bg-info">Description</span>: {detailAucation.description}
                 </p>
 
                 <p className="mb-2">
@@ -185,7 +186,7 @@ const handleAddBid = async () => {
 
                 {myBid !== null && (
                   <div className="alert alert-success">
-                    <strong>Tawaran Anda: </strong> Rp {myBid.toLocaleString()}
+                    <strong>Your Bid: </strong> Rp {myBid.toLocaleString()}
                     <button
                       onClick={handleDeleteBid}
                       className="btn btn-danger btn-sm ms-2"
@@ -215,7 +216,7 @@ const handleAddBid = async () => {
                       </Link>
                     </div>
                     <div className="d-flex flex-column">
-                      <label htmlFor="coverInput" className="form-label">Ubah Cover Lelang:</label>
+                      <label htmlFor="coverInput" className="form-label">Change Auction Cover:</label>
                       <input
                         type="file"
                         className="form-control"
@@ -226,13 +227,13 @@ const handleAddBid = async () => {
                         onClick={handleChangeCover}
                         className="btn btn-outline-primary mt-2"
                       >
-                        Ubah Cover
+                        Change Cover
                       </button>
                     </div>
                   </div>
                 ) : (
                   <div className="mt-3">
-                    <h5>Tambah Tawaran</h5>
+                    <h5>Add Bid</h5>
                     <input
                       type="number"
                       className="form-control"

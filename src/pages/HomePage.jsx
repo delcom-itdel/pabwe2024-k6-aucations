@@ -35,7 +35,7 @@ function HomePage() {
                 Hello, {authLogin?.name}
               </h3>
               <p className="lead" style={{ fontSize: "1.2rem" }}>
-                Welcome back! Explore our latest auctions below and start
+                Welcome back! Explore our latest aucations below and start
                 bidding!
               </p>
             </div>

@@ -21,8 +21,9 @@ function ProfilePage() {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Berhasil mengubah photo profile!",
+        title: "Profile photo updated successfully!",
         showConfirmButton: false,
+
         timer: 1200,
       });
       dispatch(setIsUserChangePhotoActionCreator(false));

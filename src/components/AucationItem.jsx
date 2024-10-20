@@ -68,7 +68,7 @@ function AucationItem({ aucation }) {
             marginBottom: "10px",
           }}
         >
-          Lihat Selengkapnya
+          See More
         </Link>
         <div style={{ fontSize: "0.95rem", marginBottom: "5px" }}>
           <span className="badge bg-info text-dark me-2">Starting Bid</span> Rp{" "}

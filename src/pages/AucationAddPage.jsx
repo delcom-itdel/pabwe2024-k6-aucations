@@ -22,7 +22,7 @@ const AucationAddPage = () => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Aucation berhasil ditambahkan!",
+        title: "Auction successfully added!",
         showConfirmButton: false,
         timer: 700,
       });

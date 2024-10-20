@@ -39,7 +39,7 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
                   className="btn btn-sm btn-outline-primary"
                   onClick={handleUploadClick}
                 >
-                  <FaUpload /> Ubah Photo Profile
+                  <FaUpload /> Change Profile Photo
                 </button>
                 <input
                   ref={fileInputRef}
@@ -54,7 +54,7 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
             <table className="table table-bordered">
               <tbody>
                 <tr>
-                  <th>Nama</th>
+                  <th>Name</th>
                   <td>{authLogin.name}</td>
                 </tr>
                 <tr>
@@ -62,7 +62,7 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
                   <td>{authLogin.email}</td>
                 </tr>
                 <tr>
-                  <th>Bergabung sejak</th>
+                  <th>Joined since</th>
                   <td>{formatDate(authLogin.created_at)}</td>
                 </tr>
               </tbody>
