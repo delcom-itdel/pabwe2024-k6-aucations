@@ -46,103 +46,93 @@ function AucationEditPage() {
     );
   };
 
-  const inputStyle = {
-    width: "100%",
-    padding: "12px 20px",
-    margin: "8px 0",
-    display: "block",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    boxSizing: "border-box",
-    transition: "border-color 0.3s",
-  };
-
   return (
-    <div className="container mt-4" style={{ maxWidth: "600px" }}>
+    <div className="container mt-5 mb-5">
       <div
-        className="card"
-        style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.1)", padding: "20px" }}
+        className="card shadow-lg mx-auto"
+        style={{ maxWidth: "1200px", borderRadius: "0.75rem" }}
       >
-        <h2 style={{ textAlign: "center" }}>Update Aucation</h2>
-        <form onSubmit={handleSubmit}>
-          <label
-            htmlFor="formTitle"
-            style={{ display: "block", marginBottom: "5px" }}
-          >
-            Title
-          </label>
-          <input
-            id="formTitle"
-            type="text"
-            placeholder="Enter auction title"
-            value={title}
-            onChange={handleInputChange(setTitle)}
-            required
-            style={inputStyle}
-          />
+        <div
+          className="card-header bg-success text-white text-center"
+          style={{ borderRadius: "0.75rem 0.75rem 0 0" }}
+        >
+          <h3 className="card-title">Update Auction</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="formTitle" className="form-label">
+                Judul Auction
+              </label>
+              <input
+                id="formTitle"
+                type="text"
+                placeholder="Masukkan judul auction"
+                value={title}
+                onChange={handleInputChange(setTitle)}
+                required
+                className="form-control"
+              />
+            </div>
 
-          <label
-            htmlFor="formDescription"
-            style={{ display: "block", marginBottom: "5px" }}
-          >
-           Description
-          </label>
-          <textarea
-            id="formDescription"
-            rows="3"
-            placeholder="Enter auction description"
-            value={description}
-            onChange={handleInputChange(setDescription)}
-            required
-            style={{ ...inputStyle, height: "auto" }}
-          />
+            <div className="mb-3">
+              <label htmlFor="formDescription" className="form-label">
+                Deskripsi Auction
+              </label>
+              <textarea
+                id="formDescription"
+                rows="3"
+                placeholder="Masukkan deskripsi auction"
+                value={description}
+                onChange={handleInputChange(setDescription)}
+                required
+                className="form-control"
+              />
+            </div>
 
-          <label
-            htmlFor="formStartBid"
-            style={{ display: "block", marginBottom: "5px" }}
-          >
-            Start Bid
-          </label>
-          <input
-            id="formStartBid"
-            type="number"
-            placeholder="Enter starting bid amount"
-            value={startBid}
-            onChange={handleInputChange(setStartBid)}
-            required
-            style={inputStyle}
-          />
+            <div className="mb-3">
+              <label htmlFor="formStartBid" className="form-label">
+                Start Bid (in Rupiah)
+              </label>
+              <input
+                id="formStartBid"
+                type="number"
+                placeholder="Masukkan nilai start bid"
+                value={startBid}
+                onChange={handleInputChange(setStartBid)}
+                required
+                className="form-control"
+              />
+            </div>
 
-          <label
-            htmlFor="formClosedAt"
-            style={{ display: "block", marginBottom: "5px" }}
-          >
-            Closing Date
-          </label>
-          <input
-            id="formClosedAt"
-            type="datetime-local"
-            value={closedAt}
-            onChange={handleInputChange(setClosedAt)}
-            required
-            style={inputStyle}
-          />
+            <div className="mb-3">
+              <label htmlFor="formClosedAt" className="form-label">
+                Tanggal Penutupan
+              </label>
+              <input
+                id="formClosedAt"
+                type="datetime-local"
+                value={closedAt}
+                onChange={handleInputChange(setClosedAt)}
+                required
+                className="form-control"
+              />
+            </div>
 
-          <div style={{ textAlign: "right", marginTop: "20px" }}>
-            <button
-              type="submit"
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "green",
-                color: "white",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
-              Save
-            </button>
-          </div>
-        </form>
+            <div className="d-flex justify-content-end gap-2">
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="btn btn-danger"
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn btn-success">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
