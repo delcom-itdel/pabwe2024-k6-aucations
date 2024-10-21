@@ -8,12 +8,72 @@ a {
 .w-300px {
   width: 376px;
 }
-.nav-item {
-  display: table-cell;
+.custom-navbar {
+  background-color: #72bf78;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+  border-radius: 10px;
 }
+
+.custom-navbar-brand {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.8rem;
+  font-family: Poppins, sans-serif;
+}
+
+.custom-btn {
+  background-color: #257180;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 0.7rem 1.5rem;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.custom-btn:hover {
+  background-color: #4e8c8f;
+}
+
 .nav-profile {
   border-radius: 50%;
-  width: 36px;
+  border: 3px solid #257180;
+  width: 40px;
+  height: 40px;
+}
+
+.custom-dropdown-menu {
+  background-color: #257180;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-dropdown-item {
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: Roboto, sans-serif;
+  transition: background-color 0.2s;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #5aa667;
+}
+
+.navbar-toggler {
+  border-color: #fff; /* Warna border tombol hamburger */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  /* Mengubah ikon hamburger menjadi warna putih (#fff) */
+}
+.nav-item {
+  display: table-cell;
 }
 .margin-main {
   margin-top: 80px;
