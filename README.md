@@ -5,8 +5,8 @@
 | 11S22039 | Prans Simarmata   | pransdaniel   |
 | 11S22038 | Yizreel Sipahutar | codenameyizzz |
 | 11S22025 | Martha Tobing     | marthayulinda |
-| 11S22024 | Gracesia Marbun   | MariaNasution |
-| 11S22020 | Maria Nasution    | Gracesiamrbn  |
+| 11S22024 | Gracesia Marbun   | Gracesiamrbn  |
+| 11S22020 | Maria Nasution    | MariaNasution |
 
 # Logs
 
