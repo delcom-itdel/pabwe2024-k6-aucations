@@ -56,13 +56,13 @@ function AucationEditPage() {
           className="card-header bg-success text-white text-center"
           style={{ borderRadius: "0.75rem 0.75rem 0 0" }}
         >
-          <h3 className="card-title">Update Auction</h3>
+          <h3 className="card-title">Update Aucation</h3>
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="formTitle" className="form-label">
-                Judul Auction
+                Judul Aucation
               </label>
               <input
                 id="formTitle"
