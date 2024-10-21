@@ -77,7 +77,7 @@ function AucationEditPage() {
 
             <div className="mb-3">
               <label htmlFor="formDescription" className="form-label">
-                Deskripsi Auction
+                Deskripsi Aucation
               </label>
               <textarea
                 id="formDescription"
