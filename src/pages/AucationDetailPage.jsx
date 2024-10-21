@@ -98,25 +98,28 @@ const handleChangeCover = () => {
 };
 
 
-
-
 // Handler to add a bid
 const handleAddBid = async () => {
-  const bidValue = parseFloat(bidAmount);
+  // Validasi apakah bidAmount kosong atau hanya spasi
+  if (!bidAmount || bidAmount.trim() === "") {
+   Swal.fire("Error", "Bid amount cannot be empty", "error");
+   return;
+ }
+ const bidValue = parseFloat(bidAmount);
 
-  if (bidValue <= 0) {
-    Swal.fire("Error", "Please enter a valid bid amount", "error");
-  } else if (detailAucation.bids.length === 0 && bidValue < detailAucation.start_bid) {
-    // If no bid exists and bid is lower than the start bid
-    Swal.fire("Error", `Your bid must be higher than the starting bid of Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
-  } else if (highestBid !== null && bidValue <= highestBid) {
-    // If a bid exists and the bid value is lower than or equal to the highest bid
-    Swal.fire("Error", `Your bid must be higher than the current highest bid of Rp ${highestBid.toLocaleString("id-ID")}`, "error");
-  } else {
-    await dispatch(asyncAddBid({ id, bid: bidValue }));
-    Swal.fire("Success", "Bid successfully added", "success");
-    await dispatch(asyncDetailAucation(id)); // Reload auction details
-  }
+ if (bidValue <= 0) {
+   Swal.fire("Error", "Please enter a valid bid amount", "error");
+ } else if (detailAucation.bids.length === 0 && bidValue < detailAucation.start_bid) {
+   // If no bid exists and bid is lower than the start bid
+   Swal.fire("Error", `Your bid must be higher than the starting bid of Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
+ } else if (highestBid !== null && bidValue <= highestBid) {
+   // If a bid exists and the bid value is lower than or equal to the highest bid
+   Swal.fire("Error", `Your bid must be higher than the current highest bid of Rp ${highestBid.toLocaleString("id-ID")}`, "error");
+ } else {
+   await dispatch(asyncAddBid({ id, bid: bidValue }));
+   Swal.fire("Success", "Bid successfully added", "success");
+   await dispatch(asyncDetailAucation(id)); // Reload auction details
+ }
 };
 
 
