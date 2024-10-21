@@ -28,3 +28,5 @@
 - Menambah AucationDetail (11S22020 - Maria Laura Nasution)
 - Menambah AucationList (11S22020 - Maria Laura Nasution)
 - Menambah PopUp Berhasil hapus dan memperbaharui AucationDetail (11S22020 - Maria Laura Nasution)
+- Menambah AucationEditPage (11S22024 - Gracesia Romauli Marbun)
+- Mengubdate UserDetail (11S22024 - Gracesia Romauli Marbun)
