@@ -1,67 +1,15 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { FaUser, FaRightFromBracket } from "react-icons/fa6"; // Menghapus FaPlus
+import { FaUser, FaRightFromBracket } from "react-icons/fa6";
 
 function Navigation({ authLogin, onAuthSignOut }) {
   const { id, name, photo } = authLogin;
 
-  // Custom styles for the navigation components
-  const styles = {
-    navbar: {
-      backgroundColor: "#72BF78", // Warna hijau utama
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-      transition: "background-color 0.3s",
-      borderRadius: "10px", // Tambahkan border-radius untuk navbar agar melengkung
-    },
-    navbarBrand: {
-      color: "#fff",
-      fontWeight: "bold",
-      fontSize: "1.8rem", // Sedikit memperbesar ukuran font
-      fontFamily: "Poppins, sans-serif", // Gunakan font yang modern
-    },
-    button: {
-      backgroundColor: "#257180", // Warna tombol hijau lebih cerah
-      color: "#fff",
-      border: "none",
-      borderRadius: "25px", // Tombol melengkung lebih besar
-      padding: "0.7rem 1.5rem", // Ukuran tombol lebih besar
-      marginRight: "10px",
-      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      fontSize: "1rem", // Perbesar ukuran teks
-      fontWeight: "600", // Tambah ketebalan font
-      transition: "all 0.3s",
-    },
-    buttonHover: {
-      backgroundColor: "#4E8C8F", // Warna hijau lebih gelap saat hover
-    },
-    profileImg: {
-      borderRadius: "50%",
-      border: "3px solid #257180", // Border hijau yang lebih mencolok
-      width: "40px",
-      height: "40px",
-    },
-    dropdownMenu: {
-      backgroundColor: "#257180",
-      borderRadius: "10px",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-    },
-    dropdownItem: {
-      color: "#fff",
-      padding: "10px 20px",
-      textDecoration: "none",
-      fontFamily: "Roboto, sans-serif",
-      transition: "background-color 0.2s",
-    },
-    dropdownItemHover: {
-      backgroundColor: "#5AA667",
-    },
-  };
-
   return (
     <div>
-      <nav className="navbar navbar-expand-lg" style={styles.navbar}>
+      <nav className="navbar navbar-expand-lg custom-navbar">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/" style={styles.navbarBrand}>
+          <Link className="navbar-brand custom-navbar-brand" to="/">
             Aucation App
           </Link>
           <button
@@ -72,7 +20,6 @@ function Navigation({ authLogin, onAuthSignOut }) {
             aria-controls="navApp"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            style={{ borderColor: "#fff" }}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -80,17 +27,8 @@ function Navigation({ authLogin, onAuthSignOut }) {
             <ul className="navbar-nav ms-auto">
               <li className="mt-2 me-2">
                 <Link
-                  className="btn"
+                  className="btn custom-btn"
                   to="/aucations/add"
-                  style={styles.button}
-                  onMouseOver={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.buttonHover.backgroundColor)
-                  }
-                  onMouseOut={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.button.backgroundColor)
-                  }
                 >
                   Add Aucations
                 </Link>
@@ -103,50 +41,28 @@ function Navigation({ authLogin, onAuthSignOut }) {
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{ color: "#fff", fontSize: "1rem" }}
                 >
                   <img
                     className="nav-profile"
                     src={photo}
                     alt={id}
                     title={name}
-                    style={styles.profileImg}
                   />
                 </a>
                 <ul
-                  className="dropdown-menu dropdown-menu-end"
+                  className="dropdown-menu dropdown-menu-end custom-dropdown-menu"
                   aria-labelledby="navUser"
-                  style={styles.dropdownMenu}
                 >
                   <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/users/me"
-                      style={styles.dropdownItem}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          styles.dropdownItemHover.backgroundColor)
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "transparent")
-                      }
-                    >
+                    <Link className="dropdown-item custom-dropdown-item" to="/users/me">
                       <FaUser /> Profile
                     </Link>
                   </li>
                   <li>
                     <button
                       type="button"
-                      className="dropdown-item"
+                      className="dropdown-item custom-dropdown-item"
                       onClick={onAuthSignOut}
-                      style={styles.dropdownItem}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          styles.dropdownItemHover.backgroundColor)
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "transparent")
-                      }
                     >
                       <FaRightFromBracket /> Sign out
                     </button>
@@ -161,7 +77,6 @@ function Navigation({ authLogin, onAuthSignOut }) {
   );
 }
 
-// Define the shape of the authLogin prop for validation
 Navigation.propTypes = {
   authLogin: PropTypes.shape({
     id: PropTypes.number.isRequired,
