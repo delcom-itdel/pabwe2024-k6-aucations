@@ -1,15 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetAucations } from "../states/aucations/action";
 import AucationItem from "../components/AucationItem";
+import Typed from "typed.js";
 
 function HomePage() {
   const dispatch = useDispatch();
   const { authLogin = null, aucations = [] } = useSelector((states) => states);
 
+  const typedElement = useRef(null); // Reference to the element where typing effect will be applied
+
   useEffect(() => {
     dispatch(asyncGetAucations());
   }, [dispatch]);
+
+  useEffect(() => {
+    const typedOptions = {
+      strings: [`Hello, ${authLogin?.name || "Guest"}`],
+      typeSpeed: 100,  // Memperlambat kecepatan mengetik
+      backSpeed: 70,   // Memperlambat kecepatan menghapus (jika ada)
+      loop: false,
+    };
+
+    // Initialize Typed.js
+    const typed = new Typed(typedElement.current, typedOptions);
+
+    // Cleanup on component unmount
+    return () => {
+      typed.destroy();
+    };
+  }, [authLogin]);
 
   return (
     <section
@@ -32,7 +52,7 @@ function HomePage() {
           <div className="row align-items-center">
             <div className="col-md-8">
               <h3 className="fw-bold mb-2" style={{ fontSize: "2rem" }}>
-                Hello, {authLogin?.name}
+                <span ref={typedElement}></span> {/* Element with typing effect */}
               </h3>
               <p className="lead" style={{ fontSize: "1.2rem" }}>
                 Welcome back! Explore our latest aucations below and start
