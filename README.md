@@ -30,3 +30,9 @@
 - Menambah PopUp Berhasil hapus dan memperbaharui AucationDetail (11S22020 - Maria Laura Nasution)
 - Menambah AucationEditPage (11S22024 - Gracesia Romauli Marbun)
 - Mengupdate UserDetail (11S22024 - Gracesia Romauli Marbun)
+
+## [21-10-2024]
+- Mengupdate style.css (11S22025 - Martha Yulinda Lbn Tobing)
+- Mengupdate tampilan AucationEditPage (11S22025 - Martha Yulinda Lbn Tobing)
+- Mengupdate tampilan navigasi (11S22025 - Martha Yulinda Lbn Tobing)
+- Menambahkan efek typing pada greater (11S22025 - Martha Yulinda Lbn Tobing)
