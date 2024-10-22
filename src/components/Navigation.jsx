@@ -6,7 +6,7 @@ import { useState } from "react";
 function Navigation({ authLogin, onAuthSignOut }) {
   const { id, name, photo } = authLogin;
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -15,7 +15,7 @@ function Navigation({ authLogin, onAuthSignOut }) {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`); // Redirect to search page
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
     }
   };
 
@@ -38,9 +38,11 @@ function Navigation({ authLogin, onAuthSignOut }) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navApp">
-            <ul className="navbar-nav ms-auto">
+            <ul className="navbar-nav ms-auto align-items-center d-flex">
               {/* Search Form */}
-              <li className="nav-item">
+              <li className="nav-item d-flex align-items-center me-3">
+                {" "}
+                {/* Flex container for better alignment */}
                 <form className="d-flex" onSubmit={handleSearchSubmit}>
                   <input
                     className="form-control me-2"
@@ -49,17 +51,30 @@ function Navigation({ authLogin, onAuthSignOut }) {
                     aria-label="Search"
                     value={searchQuery}
                     onChange={handleSearchInputChange}
+                    style={{
+                      borderRadius: "4px",
+                      padding: "0.375rem 0.75rem",
+                    }}
                   />
-                  <button className="btn btn-outline-success" type="submit">
+                  <button
+                    className="btn btn-outline-success"
+                    type="submit"
+                    style={{
+                      borderRadius: "4px",
+                      padding: "0.375rem 0.75rem",
+                    }}
+                  >
                     Search
                   </button>
                 </form>
               </li>
-              <li className="mt-2 me-2">
+              {/* Add Auction Button */}
+              <li className="nav-item me-2">
                 <Link className="btn custom-btn" to="/aucations/add">
-                  Add Aucation
+                  Add Auction
                 </Link>
               </li>
+              {/* User Profile Dropdown */}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link mx-2 dropdown-toggle"
