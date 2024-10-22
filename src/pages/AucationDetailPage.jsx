@@ -107,6 +107,15 @@ const handleAddBid = async () => {
  }
  const bidValue = parseFloat(bidAmount);
 
+ // Cek apakah lelang sudah ditutup (lebih dari hari ini)
+ const today = new Date();
+ const closedDate = new Date(detailAucation.closed_at);
+ 
+ if (closedDate < today) {
+  Swal.fire("Error", "This auction is closed. You cannot place a bid.", "error");
+  return;
+}
+
  if (bidValue <= 0) {
    Swal.fire("Error", "Please enter a valid bid amount", "error");
  } else if (detailAucation.bids.length === 0 && bidValue < detailAucation.start_bid) {
@@ -121,6 +130,7 @@ const handleAddBid = async () => {
    await dispatch(asyncDetailAucation(id)); // Reload auction details
  }
 };
+
 
 
   // Handler to delete the user's bid
