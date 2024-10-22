@@ -61,7 +61,11 @@ function AucationDetailPage() {
         dispatch(asyncDeleteAucation(id))
           .then(() => {
             // Tampilkan popup jika berhasil dihapus
-            Swal.fire("Succes!", "The auction has been successfully deleted.", "success");
+            Swal.fire(
+              "Succes!",
+              "The auction has been successfully deleted.",
+              "success"
+            );
             navigate("/"); // Kembali ke halaman utama setelah penghapusan
           })
           .catch((error) => {
@@ -71,7 +75,6 @@ function AucationDetailPage() {
       }
     });
   };
-  
 
   // Handler for cover file selection
   const handleCoverChange = (event) => {
@@ -82,56 +85,72 @@ function AucationDetailPage() {
   };
 
   // Handler to change the aucation cover
-const handleChangeCover = () => {
-  if (selectedCover) {
-    dispatch(asyncChangeAucationCover({ id, cover: selectedCover }))
-      .then(() => {
-        Swal.fire("Success", "Auction cover updated successfully", "success");
-        navigate("/"); // Return to the homepage after success
-      })
-      .catch((error) => {
-        Swal.fire("Error", error.message, "error");
-      });
-  } else {
-    Swal.fire("Error", "Please select a cover to upload", "error");
-  }
-};
+  const handleChangeCover = () => {
+    if (selectedCover) {
+      dispatch(asyncChangeAucationCover({ id, cover: selectedCover }))
+        .then(() => {
+          Swal.fire("Success", "Auction cover updated successfully", "success");
+          navigate("/"); // Return to the homepage after success
+        })
+        .catch((error) => {
+          Swal.fire("Error", error.message, "error");
+        });
+    } else {
+      Swal.fire("Error", "Please select a cover to upload", "error");
+    }
+  };
 
+  // Handler to add a bid
+  const handleAddBid = async () => {
+    // Validasi apakah bidAmount kosong atau hanya spasi
+    if (!bidAmount || bidAmount.trim() === "") {
+      Swal.fire("Error", "Bid amount cannot be empty", "error");
+      return;
+    }
+    const bidValue = parseFloat(bidAmount);
 
-// Handler to add a bid
-const handleAddBid = async () => {
-  // Validasi apakah bidAmount kosong atau hanya spasi
-  if (!bidAmount || bidAmount.trim() === "") {
-   Swal.fire("Error", "Bid amount cannot be empty", "error");
-   return;
- }
- const bidValue = parseFloat(bidAmount);
+    // Cek apakah lelang sudah ditutup (lebih dari hari ini)
+    const today = new Date();
+    const closedDate = new Date(detailAucation.closed_at);
 
- // Cek apakah lelang sudah ditutup (lebih dari hari ini)
- const today = new Date();
- const closedDate = new Date(detailAucation.closed_at);
- 
- if (closedDate < today) {
-  Swal.fire("Error", "This auction is closed. You cannot place a bid.", "error");
-  return;
-}
+    if (closedDate < today) {
+      Swal.fire(
+        "Error",
+        "This auction is closed. You cannot place a bid.",
+        "error"
+      );
+      return;
+    }
 
- if (bidValue <= 0) {
-   Swal.fire("Error", "Please enter a valid bid amount", "error");
- } else if (detailAucation.bids.length === 0 && bidValue < detailAucation.start_bid) {
-   // If no bid exists and bid is lower than the start bid
-   Swal.fire("Error", `Your bid must be higher than the starting bid of Rp ${detailAucation.start_bid.toLocaleString("id-ID")}`, "error");
- } else if (highestBid !== null && bidValue <= highestBid) {
-   // If a bid exists and the bid value is lower than or equal to the highest bid
-   Swal.fire("Error", `Your bid must be higher than the current highest bid of Rp ${highestBid.toLocaleString("id-ID")}`, "error");
- } else {
-   await dispatch(asyncAddBid({ id, bid: bidValue }));
-   Swal.fire("Success", "Bid successfully added", "success");
-   await dispatch(asyncDetailAucation(id)); // Reload auction details
- }
-};
-
-
+    if (bidValue <= 0) {
+      Swal.fire("Error", "Please enter a valid bid amount", "error");
+    } else if (
+      detailAucation.bids.length === 0 &&
+      bidValue < detailAucation.start_bid
+    ) {
+      // If no bid exists and bid is lower than the start bid
+      Swal.fire(
+        "Error",
+        `Your bid must be higher than the starting bid of Rp ${detailAucation.start_bid.toLocaleString(
+          "id-ID"
+        )}`,
+        "error"
+      );
+    } else if (highestBid !== null && bidValue <= highestBid) {
+      // If a bid exists and the bid value is lower than or equal to the highest bid
+      Swal.fire(
+        "Error",
+        `Your bid must be higher than the current highest bid of Rp ${highestBid.toLocaleString(
+          "id-ID"
+        )}`,
+        "error"
+      );
+    } else {
+      await dispatch(asyncAddBid({ id, bid: bidValue }));
+      Swal.fire("Success", "Bid successfully added", "success");
+      await dispatch(asyncDetailAucation(id)); // Reload auction details
+    }
+  };
 
   // Handler to delete the user's bid
   const handleDeleteBid = () => {
@@ -152,7 +171,7 @@ const handleAddBid = async () => {
       }
     });
   };
-  
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -162,38 +181,58 @@ const handleAddBid = async () => {
       <div className="container pt-3">
         {detailAucation ? (
           <>
-            <div className="card shadow-sm mb-4" style={{ borderRadius: '12px', overflow: 'hidden' }}>
+            <div
+              className="card shadow-sm mb-4"
+              style={{ borderRadius: "12px", overflow: "hidden" }}
+            >
               {/* Cover image with larger height and full width */}
               {detailAucation.cover && (
                 <img
                   src={detailAucation.cover}
                   className="card-img-top"
                   alt={detailAucation.title}
-                  style={{ objectFit: "contain", width: "100%", height: "350px" }}
+                  style={{
+                    objectFit: "contain",
+                    width: "100%",
+                    height: "350px",
+                  }}
                 />
               )}
               <div className="card-body">
                 {/* Title and description */}
-                <h2 className="text-primary mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                <h2
+                  className="text-primary mb-3"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
                   {detailAucation.title}
                 </h2>
 
-                <p className="mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  <span className="badge bg-info">Description</span>: {detailAucation.description}
+                <p
+                  className="mb-3"
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    textAlign: "justify",
+                  }}
+                >
+                  <span className="badge bg-info">Description</span>:{" "}
+                  {detailAucation.description}
                 </p>
 
                 <p className="mb-2">
-                  <span className="badge bg-primary">Starting Bid</span>: Rp {detailAucation.start_bid.toLocaleString("id-ID")}
+                  <span className="badge bg-primary">Starting Bid</span>: Rp{" "}
+                  {detailAucation.start_bid.toLocaleString("id-ID")}
                 </p>
 
                 <p className="mb-2">
-                  <span className="badge bg-warning">Closing Date</span>: {new Date(detailAucation.closed_at).toLocaleDateString()}
+                  <span className="badge bg-warning">Closing Date</span>:{" "}
+                  {new Date(detailAucation.closed_at).toLocaleDateString()}
                 </p>
 
                 {/* Highest bid and user's bid */}
                 {highestBid !== null && (
                   <div className="alert alert-info">
-                    <strong>Highest Bid: </strong> Rp {highestBid.toLocaleString()}
+                    <strong>Highest Bid: </strong> Rp{" "}
+                    {highestBid.toLocaleString()}
                   </div>
                 )}
 
@@ -218,8 +257,7 @@ const handleAddBid = async () => {
                         onClick={handleDelete}
                         className="btn btn-danger me-2"
                       >
-                        <FaTrash>
-                        </FaTrash> Delete 
+                        <FaTrash></FaTrash> Delete
                       </button>
                       <Link
                         to={`/aucations/edit/${id}`}
@@ -229,7 +267,9 @@ const handleAddBid = async () => {
                       </Link>
                     </div>
                     <div className="d-flex flex-column">
-                      <label htmlFor="coverInput" className="form-label">Change Auction Cover:</label>
+                      <label htmlFor="coverInput" className="form-label">
+                        Change Auction Cover:
+                      </label>
                       <input
                         type="file"
                         className="form-control"
@@ -254,7 +294,10 @@ const handleAddBid = async () => {
                       onChange={(e) => setBidAmount(e.target.value)}
                       placeholder="Masukkan jumlah tawaran"
                     />
-                    <button onClick={handleAddBid} className="btn btn-success mt-2">
+                    <button
+                      onClick={handleAddBid}
+                      className="btn btn-success mt-2"
+                    >
                       Add Bid
                     </button>
                   </div>

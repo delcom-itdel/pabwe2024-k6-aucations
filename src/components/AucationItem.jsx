@@ -51,10 +51,11 @@ function AucationItem({ aucation }) {
             color: "#555",
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 2, // Limit text to 2 lines
+            WebkitLineClamp: 2, // Batasi teks ke 2 baris
             overflow: "hidden",
-            textOverflow: "ellipsis", // Add ellipsis when text overflows
+            textOverflow: "ellipsis", // Tambahkan elipsis saat teks terpotong
             marginBottom: "10px",
+            minHeight: "2.4rem", // Sesuaikan tinggi minimum untuk 2 baris teks
           }}
         >
           {aucation.description}
