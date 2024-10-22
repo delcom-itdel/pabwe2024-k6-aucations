@@ -14,9 +14,10 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
-import AucationAddPage from "./pages/AucationAddPage"; 
-import AucationDetailPage from "./pages/AucationDetailPage"; 
-import AucationEditPage from "./pages/AucationEditPage"; 
+import AucationAddPage from "./pages/AucationAddPage";
+import AucationDetailPage from "./pages/AucationDetailPage";
+import AucationEditPage from "./pages/AucationEditPage";
+import AucationSearchPage from "./pages/AucationSearchPage";
 
 function App() {
   // Mengambil state dari Redux store
@@ -96,6 +97,7 @@ function App() {
             <Route path="/aucations/add" element={<AucationAddPage />} />
             <Route path="/aucations/:id" element={<AucationDetailPage />} />
             <Route path="/aucations/edit/:id" element={<AucationEditPage />} />
+            <Route path="/search" element={<AucationSearchPage />} />
           </Routes>
         </main>
       </div>

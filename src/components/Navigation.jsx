@@ -1,9 +1,23 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaRightFromBracket } from "react-icons/fa6";
+import { useState } from "react";
 
 function Navigation({ authLogin, onAuthSignOut }) {
   const { id, name, photo } = authLogin;
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`); // Redirect to search page
+    }
+  };
 
   return (
     <div>
@@ -25,12 +39,25 @@ function Navigation({ authLogin, onAuthSignOut }) {
           </button>
           <div className="collapse navbar-collapse" id="navApp">
             <ul className="navbar-nav ms-auto">
+              {/* Search Form */}
+              <li className="nav-item">
+                <form className="d-flex" onSubmit={handleSearchSubmit}>
+                  <input
+                    className="form-control me-2"
+                    type="search"
+                    placeholder="Search by title"
+                    aria-label="Search"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                  />
+                  <button className="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </li>
               <li className="mt-2 me-2">
-                <Link
-                  className="btn custom-btn"
-                  to="/aucations/add"
-                >
-                  Add Aucations
+                <Link className="btn custom-btn" to="/aucations/add">
+                  Add Aucation
                 </Link>
               </li>
               <li className="nav-item dropdown">
@@ -54,7 +81,10 @@ function Navigation({ authLogin, onAuthSignOut }) {
                   aria-labelledby="navUser"
                 >
                   <li>
-                    <Link className="dropdown-item custom-dropdown-item" to="/users/me">
+                    <Link
+                      className="dropdown-item custom-dropdown-item"
+                      to="/users/me"
+                    >
                       <FaUser /> Profile
                     </Link>
                   </li>
