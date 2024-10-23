@@ -26,7 +26,6 @@ a {
 .form-control {
   border-radius: 20px;
   padding: 0.5rem 1rem;
-  width: 250px; /* Lebar default form pencarian */
 }
 
 .custom-btn {
