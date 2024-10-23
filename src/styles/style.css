@@ -13,6 +13,7 @@ a {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s;
   border-radius: 10px;
+  padding: 10px 20px;
 }
 
 .custom-navbar-brand {
@@ -20,6 +21,12 @@ a {
   font-weight: bold;
   font-size: 1.8rem;
   font-family: Poppins, sans-serif;
+}
+
+.form-control {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 250px; /* Lebar default form pencarian */
 }
 
 .custom-btn {
@@ -32,11 +39,11 @@ a {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s;
 }
 
 .custom-btn:hover {
   background-color: #4e8c8f;
+  transform: scale(1.05); /* Sedikit efek saat di-hover */
 }
 
 .nav-profile {
@@ -49,7 +56,6 @@ a {
 .custom-dropdown-menu {
   background-color: #257180;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .custom-dropdown-item {
@@ -111,5 +117,30 @@ a {
 @keyframes l1 {
   100% {
     transform: rotate(1turn);
+  }
+}
+
+@media (max-width: 991px) {
+  /* Align Add and Profile side by side on small screens */
+  .navbar-nav {
+    flex-direction: column; /* Stack the items vertically */
+  }
+
+  .nav-item {
+    width: 100%; /* Full width for each item */
+  }
+
+  .custom-btn,
+  .form-control {
+    width: 100%; /* Full width for buttons and form inputs */
+    margin-bottom: 10px; /* Add spacing between stacked items */
+  }
+
+  .nav-profile {
+    margin-left: auto; /* Align the profile image to the right */
+  }
+
+  .form-control {
+    margin-bottom: 15px; /* Ensure there's space between form and buttons */
   }
 }
