@@ -36,3 +36,7 @@
 - Mengupdate tampilan AucationEditPage (11S22025 - Martha Yulinda Lbn Tobing)
 - Mengupdate tampilan navigasi (11S22025 - Martha Yulinda Lbn Tobing)
 - Menambahkan efek typing pada greater (11S22025 - Martha Yulinda Lbn Tobing)
+- Update HandleAddBid pada AucationDetailPage (11S22020 - Maria Laura Nasution)
+
+## [22-10-2024]
+- Update popup pada AucationDetailPage (11S22020 - Maria Laura Nasution)
