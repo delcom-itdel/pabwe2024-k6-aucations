@@ -41,7 +41,7 @@ function AucationSearchPage() {
     >
       {" "}
       <div className="container">
-        <h2 className="my-4">Search Results for "{searchQuery}"</h2>
+        <h2 className="my-4">Search Results for &quot;{searchQuery}&quot;</h2>
         {isLoading ? (
           <p>Loading...</p>
         ) : searchResults.length > 0 ? (
@@ -53,7 +53,7 @@ function AucationSearchPage() {
             ))}
           </div>
         ) : (
-          <p>No results found for "{searchQuery}".</p>
+          <p>No results found for &quot;{searchQuery}&quot;.</p>
         )}
       </div>{" "}
     </section>
