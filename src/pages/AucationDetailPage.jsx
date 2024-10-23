@@ -1,4 +1,6 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+// action.js dan reducer.js sudah dijelaskan sebelumnya dan diasumsikan sudah terpisah dengan benar
+
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2"; // SweetAlert for confirmation dialogs
 import React from "react";
@@ -11,7 +13,7 @@ import {
   asyncDeleteBid,
 } from "../states/aucations/action";
 
-import { FaTrash } from "react-icons/fa6";
+import AucationDetail from "../components/AucationDetail"; // Pastikan path ini sesuai dengan struktur folder Anda
 
 function AucationDetailPage() {
   // Initialize hooks and variables
@@ -60,16 +62,16 @@ function AucationDetailPage() {
       if (result.isConfirmed) {
         dispatch(asyncDeleteAucation(id))
           .then(() => {
-            // Tampilkan popup jika berhasil dihapus
+            // Show success popup
             Swal.fire(
-              "Succes!",
+              "Success!",
               "The auction has been successfully deleted.",
               "success"
             );
-            navigate("/"); // Kembali ke halaman utama setelah penghapusan
+            navigate("/"); // Redirect to homepage after deletion
           })
           .catch((error) => {
-            // Tampilkan popup jika ada kesalahan saat menghapus
+            // Show error popup
             Swal.fire("Error", error.message, "error");
           });
       }
@@ -102,14 +104,14 @@ function AucationDetailPage() {
 
   // Handler to add a bid
   const handleAddBid = async () => {
-    // Validasi apakah bidAmount kosong atau hanya spasi
+    // Validate if bidAmount is empty or just spaces
     if (!bidAmount || bidAmount.trim() === "") {
       Swal.fire("Error", "Bid amount cannot be empty", "error");
       return;
     }
     const bidValue = parseFloat(bidAmount);
 
-    // Cek apakah lelang sudah ditutup (lebih dari hari ini)
+    // Check if auction is closed (past the closing date)
     const today = new Date();
     const closedDate = new Date(detailAucation.closed_at);
 
@@ -167,7 +169,14 @@ function AucationDetailPage() {
       buttonsStyling: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(asyncDeleteBid({ id }));
+        dispatch(asyncDeleteBid({ id }))
+          .then(() => {
+            Swal.fire("Success", "Bid deleted successfully", "success");
+            dispatch(asyncDetailAucation(id)); // Reload auction details after deleting bid
+          })
+          .catch((error) => {
+            Swal.fire("Error", error.message, "error");
+          });
       }
     });
   };
@@ -180,131 +189,20 @@ function AucationDetailPage() {
     <section>
       <div className="container pt-3">
         {detailAucation ? (
-          <>
-            <div
-              className="card shadow-sm mb-4"
-              style={{ borderRadius: "12px", overflow: "hidden" }}
-            >
-              {/* Cover image with larger height and full width */}
-              {detailAucation.cover && (
-                <img
-                  src={detailAucation.cover}
-                  className="card-img-top"
-                  alt={detailAucation.title}
-                  style={{
-                    objectFit: "contain",
-                    width: "100%",
-                    height: "350px",
-                  }}
-                />
-              )}
-              <div className="card-body">
-                {/* Title and description */}
-                <h2
-                  className="text-primary mb-3"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  {detailAucation.title}
-                </h2>
-
-                <p
-                  className="mb-3"
-                  style={{
-                    fontFamily: "Roboto, sans-serif",
-                    textAlign: "justify",
-                  }}
-                >
-                  <span className="badge bg-info">Description</span>:{" "}
-                  {detailAucation.description}
-                </p>
-
-                <p className="mb-2">
-                  <span className="badge bg-primary">Starting Bid</span>: Rp{" "}
-                  {detailAucation.start_bid.toLocaleString("id-ID")}
-                </p>
-
-                <p className="mb-2">
-                  <span className="badge bg-warning">Closing Date</span>:{" "}
-                  {new Date(detailAucation.closed_at).toLocaleDateString()}
-                </p>
-
-                {/* Highest bid and user's bid */}
-                {highestBid !== null && (
-                  <div className="alert alert-info">
-                    <strong>Highest Bid: </strong> Rp{" "}
-                    {highestBid.toLocaleString()}
-                  </div>
-                )}
-
-                {myBid !== null && (
-                  <div className="alert alert-success">
-                    <strong>Your Bid: </strong> Rp {myBid.toLocaleString()}
-                    <button
-                      onClick={handleDeleteBid}
-                      className="btn btn-danger btn-sm ms-2"
-                    >
-                      Delete Bid
-                    </button>
-                  </div>
-                )}
-
-                {/* Grouped Action buttons */}
-                {authLogin && detailAucation.user_id === authLogin.id ? (
-                  <div className="d-flex justify-content-between align-items-center mt-4">
-                    <div className="d-flex align-items-center">
-                      <button
-                        type="button"
-                        onClick={handleDelete}
-                        className="btn btn-danger me-2"
-                      >
-                        <FaTrash></FaTrash> Delete
-                      </button>
-                      <Link
-                        to={`/aucations/edit/${id}`}
-                        className="btn btn-primary me-2"
-                      >
-                        Edit
-                      </Link>
-                    </div>
-                    <div className="d-flex flex-column">
-                      <label htmlFor="coverInput" className="form-label">
-                        Change Auction Cover:
-                      </label>
-                      <input
-                        type="file"
-                        className="form-control"
-                        id="coverInput"
-                        onChange={handleCoverChange}
-                      />
-                      <button
-                        onClick={handleChangeCover}
-                        className="btn btn-outline-primary mt-2"
-                      >
-                        Change Cover
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="mt-3">
-                    <h5>Add Bid</h5>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={bidAmount}
-                      onChange={(e) => setBidAmount(e.target.value)}
-                      placeholder="Masukkan jumlah tawaran"
-                    />
-                    <button
-                      onClick={handleAddBid}
-                      className="btn btn-success mt-2"
-                    >
-                      Add Bid
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </>
+          <AucationDetail
+            aucation={detailAucation}
+            highestBid={highestBid}
+            myBid={myBid}
+            authLogin={authLogin}
+            handleDelete={handleDelete}
+            handleCoverChange={handleCoverChange}
+            handleChangeCover={handleChangeCover}
+            selectedCover={selectedCover}
+            handleAddBid={handleAddBid}
+            bidAmount={bidAmount}
+            setBidAmount={setBidAmount}
+            handleDeleteBid={handleDeleteBid}
+          />
         ) : (
           <div className="alert alert-danger">Aucation not found.</div>
         )}
