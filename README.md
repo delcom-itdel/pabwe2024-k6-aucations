@@ -40,3 +40,4 @@
 
 ## [22-10-2024]
 - Update popup pada AucationDetailPage (11S22020 - Maria Laura Nasution)
+- Membuat Fitur Search (11S22039 - Prans Daniel Simarmata)
